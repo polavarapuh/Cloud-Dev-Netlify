@@ -28,13 +28,12 @@
         </div>
     </div>
 
------***
 
     <ul id="visitor-list"></ul>
 
 <script>
     // Call the Netlify function — same domain, no CORS issues
-    fetch('/.netlify/functions/get-visitors')
+    fetch('/.netlify/functions/get_visitors')
         .then(response => response.json())  // parse the JSON response
         .then(visitors => {
             const list = document.getElementById('visitor-list');
