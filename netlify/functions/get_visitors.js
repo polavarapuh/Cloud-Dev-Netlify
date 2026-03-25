@@ -3,7 +3,7 @@ const { neon } = require('@neondatabase/serverless');
 
 exports.handler = async (event) => {
     // Read the connection string from the environment variable (never hardcode this)
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.GET_VISITORS_FUNCTION);
 
     // Run a SQL query using Neon's tagged template literal syntax
     const rows = await sql`SELECT * FROM visitors`;
