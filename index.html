@@ -27,6 +27,38 @@
             <button id="increment-btn">Increment</button>
         </div>
     </div>
+
+    <script>
+        async function getVisitorData() {
+    const statusElement = document.getElementById('status');
+
+    try {
+        // 1. Call the Netlify function by its filename
+        const response = await fetch('/.netlify/functions/get-visitors');
+
+        if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+        }
+
+        // 2. Parse the JSON data sent back from Neon
+        const data = await response.json();
+        
+        console.log("Visitors found:", data);
+        
+        // 3. Simple way to display it on your page
+        document.getElementById('visitor-list').innerHTML = data
+        .map(visitor => `<li>${visitor.name || 'Anonymous'}</li>`)
+        .join('');
+
+    } catch (error) {
+        console.error("Failed to fetch visitors:", error);
+        statusElement.innerText = "Error loading visitors.";
+    }
+    }
+
+        // Run the function when the page loads
+        getVisitorData();
+    </script>
    
     <script src="script.js"></script>
 </body>
